@@ -1,28 +1,19 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {Button} from 'antd-mobile';
+import {addGun, removeGun} from "./index.redux";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+class App extends React.Component {
+    render() {
+        const store = this.props.store;
+        let num = store.getState();
+        return (
+            <div>
+                <h1>现在有武器{num}把</h1>
+                <Button type={`primary`} onClick={() => store.dispatch(addGun())}>申请武器</Button>
+                <Button type={`primary`} onClick={() => store.dispatch(removeGun())}>减少武器</Button>
+            </div>
+        );
+    }
 }
 
 export default App;
